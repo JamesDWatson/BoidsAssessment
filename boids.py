@@ -15,6 +15,7 @@ position_difference = 10
 vel_difference = 100
 no_boids = 50
 
+#Generate intial boid variables.
 boids_x=[random.uniform(-450,50.0) for x in range(no_boids)]               #Generates the x and y coordinates of boids.
 boids_y=[random.uniform(300.0,600.0) for x in range(no_boids)]
 boid_x_velocities=[random.uniform(0,10.0) for x in range(no_boids)]        #Generates the velocities of the boids.
@@ -27,22 +28,22 @@ def update_boids(boids):
     x_pos,y_pos,x_vel,y_vel=boids
     
     # Fly towards the middle
-    for i in range(len(x_pos)):
-        for j in range(len(x_pos)):
-            x_vel[i]=x_vel[i]+(x_pos[j]-x_pos[i])*posit_weight/len(x_pos)
-            y_vel[i]=y_vel[i]+(y_pos[j]-y_pos[i])*posit_weight/len(x_pos)
+    for i in range(no_boids):
+        for j in range(no_boids):
+            x_vel[i]=x_vel[i]+(x_pos[j]-x_pos[i])*posit_weight/no_boids
+            y_vel[i]=y_vel[i]+(y_pos[j]-y_pos[i])*posit_weight/no_boids
             
             if (x_pos[j]-x_pos[i])**2 + (y_pos[j]-y_pos[i])**2 < position_difference**2:
                 x_vel[i]=x_vel[i]+(x_pos[i]-x_pos[j])
                 y_vel[i]=y_vel[i]+(y_pos[i]-y_pos[j])
             
             if (x_pos[j]-x_pos[i])**2 + (y_pos[j]-y_pos[i])**2 < vel_difference**2:
-                x_vel[i]=x_vel[i]+(x_vel[j]-x_vel[i])*vel_weight/len(x_pos)
-                y_vel[i]=y_vel[i]+(y_vel[j]-y_vel[i])*vel_weight/len(x_pos)
+                x_vel[i]=x_vel[i]+(x_vel[j]-x_vel[i])*vel_weight/no_boids
+                y_vel[i]=y_vel[i]+(y_vel[j]-y_vel[i])*vel_weight/no_boids
                 
                 
     # Move according to velocities
-    for i in range(len(x_pos)):
+    for i in range(no_boids):
         x_pos[i]=x_pos[i]+x_vel[i]
         y_pos[i]=y_pos[i]+y_vel[i]
 
