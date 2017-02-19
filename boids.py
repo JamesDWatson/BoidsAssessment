@@ -11,10 +11,6 @@ config=yaml.load(open("boids/config.yaml"))
 
 #def pythogoras(source,target):
 #    return (source.facing-target.facing)<source.viewport
-posit_weight = 0.01
-vel_weight = 0.125
-position_difference = 10
-vel_difference = 100
 no_boids = 50
 
 #Generate intial boid variables.
@@ -32,14 +28,14 @@ def update_boids(boids):
     # Fly towards the middle
     for i in range(no_boids):
         for j in range(no_boids):
-            x_vel[i]=x_vel[i]+(x_pos[j]-x_pos[i])*posit_weight/no_boids
-            y_vel[i]=y_vel[i]+(y_pos[j]-y_pos[i])*posit_weight/no_boids
+            x_vel[i]=x_vel[i]+(x_pos[j]-x_pos[i])*config['pos_weight']/no_boids
+            y_vel[i]=y_vel[i]+(y_pos[j]-y_pos[i])*config['vel_weight']/no_boids
             
-            if (x_pos[j]-x_pos[i])**2 + (y_pos[j]-y_pos[i])**2 < position_difference**2:
+            if (x_pos[j]-x_pos[i])**2 + (y_pos[j]-y_pos[i])**2 < config['pos_diff']**2:
                 x_vel[i]=x_vel[i]+(x_pos[i]-x_pos[j])
                 y_vel[i]=y_vel[i]+(y_pos[i]-y_pos[j])
             
-            if (x_pos[j]-x_pos[i])**2 + (y_pos[j]-y_pos[i])**2 < vel_difference**2:
+            if (x_pos[j]-x_pos[i])**2 + (y_pos[j]-y_pos[i])**2 < config['vel_diff']**2:
                 x_vel[i]=x_vel[i]+(x_vel[j]-x_vel[i])*vel_weight/no_boids
                 y_vel[i]=y_vel[i]+(y_vel[j]-y_vel[i])*vel_weight/no_boids
                 
@@ -51,7 +47,7 @@ def update_boids(boids):
 
 
 figure=plt.figure()
-axes=plt.axes(xlim=(-500,1500), ylim=(-500,1500))
+axes=plt.axes(xlim=(config['x_lim'][0],config['x_lim'][1]), ylim=(config['y_lim'][0],config['y_lim'][1]))
 scatter=axes.scatter(boids[0],boids[1])
 
 def animate(frame):
