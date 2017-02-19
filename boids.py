@@ -23,9 +23,8 @@ def update_boids(boids):
     for i in range(len(x_pos)):
         for j in range(len(x_pos)):
             x_vel[i]=x_vel[i]+(x_pos[j]-x_pos[i])*posit_weight/len(x_pos)
-    for i in range(len(x_pos)):
-        for j in range(len(x_pos)):
             y_vel[i]=y_vel[i]+(y_pos[j]-y_pos[i])*posit_weight/len(x_pos)
+ 
             
     # Fly away from nearby boids
     for i in range(len(x_pos)):
