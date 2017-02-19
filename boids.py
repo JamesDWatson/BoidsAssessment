@@ -1,6 +1,7 @@
 
 from matplotlib import pyplot as plt
 from matplotlib import animation
+import yaml
 import random
 
 # Deliberately terrible code for teaching purposes
@@ -29,15 +30,15 @@ def update_boids(boids):
     for i in range(no_boids):
         for j in range(no_boids):
             x_vel[i]=x_vel[i]+(x_pos[j]-x_pos[i])*config['pos_weight']/no_boids
-            y_vel[i]=y_vel[i]+(y_pos[j]-y_pos[i])*config['vel_weight']/no_boids
+            y_vel[i]=y_vel[i]+(y_pos[j]-y_pos[i])*config['pos_weight']/no_boids
             
             if (x_pos[j]-x_pos[i])**2 + (y_pos[j]-y_pos[i])**2 < config['pos_diff']**2:
                 x_vel[i]=x_vel[i]+(x_pos[i]-x_pos[j])
                 y_vel[i]=y_vel[i]+(y_pos[i]-y_pos[j])
             
             if (x_pos[j]-x_pos[i])**2 + (y_pos[j]-y_pos[i])**2 < config['vel_diff']**2:
-                x_vel[i]=x_vel[i]+(x_vel[j]-x_vel[i])*vel_weight/no_boids
-                y_vel[i]=y_vel[i]+(y_vel[j]-y_vel[i])*vel_weight/no_boids
+                x_vel[i]=x_vel[i]+(x_vel[j]-x_vel[i])*config['vel_weight']/no_boids
+                y_vel[i]=y_vel[i]+(y_vel[j]-y_vel[i])*config['vel_weight']/no_boids
                 
                 
     # Move according to velocities
