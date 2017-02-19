@@ -10,5 +10,5 @@ setup(
     url='https://www.placeholder.org',
     packages = find_packages(exclude=['*test']),
     scripts = ['scripts/greet'],
-    install_requires = ['argparse']   #Need to update with relevant packages.
+    install_requires = ['argparse', 'yaml', 'matplotlib']   #Need to update with relevant packages.
 )
