@@ -17,34 +17,34 @@ position_difference = 10
 vel_difference = 100
 
 def update_boids(boids):
-    x_pos,y_pos,xvs,yvs=boids
+    x_pos,y_pos,x_vel,y_vel=boids
     
     # Fly towards the middle
     for i in range(len(x_pos)):
         for j in range(len(x_pos)):
-            xvs[i]=xvs[i]+(x_pos[j]-x_pos[i])*posit_weight/len(x_pos)
+            x_vel[i]=x_vel[i]+(x_pos[j]-x_pos[i])*posit_weight/len(x_pos)
     for i in range(len(x_pos)):
         for j in range(len(x_pos)):
-            yvs[i]=yvs[i]+(y_pos[j]-y_pos[i])*posit_weight/len(x_pos)
+            y_vel[i]=y_vel[i]+(y_pos[j]-y_pos[i])*posit_weight/len(x_pos)
             
     # Fly away from nearby boids
     for i in range(len(x_pos)):
         for j in range(len(x_pos)):
             if (x_pos[j]-x_pos[i])**2 + (y_pos[j]-y_pos[i])**2 < position_difference**2:
-                xvs[i]=xvs[i]+(x_pos[i]-x_pos[j])
-                yvs[i]=yvs[i]+(y_pos[i]-y_pos[j])
+                x_vel[i]=x_vel[i]+(x_pos[i]-x_pos[j])
+                y_vel[i]=y_vel[i]+(y_pos[i]-y_pos[j])
                 
     # Try to match speed with nearby boids
     for i in range(len(x_pos)):
         for j in range(len(x_pos)):
             if (x_pos[j]-x_pos[i])**2 + (y_pos[j]-y_pos[i])**2 < vel_difference**2:
-                xvs[i]=xvs[i]+(xvs[j]-xvs[i])*vel_weight/len(x_pos)
-                yvs[i]=yvs[i]+(yvs[j]-yvs[i])*vel_weight/len(x_pos)
+                x_vel[i]=x_vel[i]+(x_vel[j]-x_vel[i])*vel_weight/len(x_pos)
+                y_vel[i]=y_vel[i]+(y_vel[j]-y_vel[i])*vel_weight/len(x_pos)
                 
     # Move according to velocities
     for i in range(len(x_pos)):
-        x_pos[i]=x_pos[i]+xvs[i]
-        y_pos[i]=y_pos[i]+yvs[i]
+        x_pos[i]=x_pos[i]+x_vel[i]
+        y_pos[i]=y_pos[i]+y_vel[i]
 
 
 figure=plt.figure()
