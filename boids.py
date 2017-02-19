@@ -5,17 +5,23 @@ import random
 
 # Deliberately terrible code for teaching purposes
 # Replace the Pythagoras theorem with function.
+# Write a Yaml file that contains all the necessary boundaries.
 
-boids_x=[random.uniform(-450,50.0) for x in range(50)]               #Generates the x and y coordinates of boids.
-boids_y=[random.uniform(300.0,600.0) for x in range(50)]
-boid_x_velocities=[random.uniform(0,10.0) for x in range(50)]        #Generates the velocities of the boids.
-boid_y_velocities=[random.uniform(-20.0,20.0) for x in range(50)]
-boids=(boids_x,boids_y,boid_x_velocities,boid_y_velocities)
-
+#def pythogoras(source,target):
+#    return (source.facing-target.facing)<source.viewport
 posit_weight = 0.01
 vel_weight = 0.125
 position_difference = 10
 vel_difference = 100
+no_boids = 50
+
+boids_x=[random.uniform(-450,50.0) for x in range(no_boids)]               #Generates the x and y coordinates of boids.
+boids_y=[random.uniform(300.0,600.0) for x in range(no_boids)]
+boid_x_velocities=[random.uniform(0,10.0) for x in range(no_boids)]        #Generates the velocities of the boids.
+boid_y_velocities=[random.uniform(-20.0,20.0) for x in range(no_boids)]
+boids=(boids_x,boids_y,boid_x_velocities,boid_y_velocities)
+
+
 
 def update_boids(boids):
     x_pos,y_pos,x_vel,y_vel=boids
