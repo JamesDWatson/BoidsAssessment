@@ -6,18 +6,18 @@ import random
 
 # Deliberately terrible code for teaching purposes
 # Replace the Pythagoras theorem with function.
-# Write a Yaml file that contains all the necessary boundaries.
 
 config=yaml.load(open("boids/config.yaml"))
 
 #def pythogoras(source,target):
 #    return (source.facing-target.facing)<source.viewport
+
 no_boids = 50
 
 #Generate intial boid variables.
 boid_x_pos=[random.uniform(config['x_pos_bound'][0],config['x_pos_bound'][1]) for x in range(no_boids)] 
 boid_y_pos=[random.uniform(config['y_pos_bound'][0],config['y_pos_bound'][1]) for x in range(no_boids)]
-boid_x_vel=[random.uniform(config['x_vel_bound'][0],config['x_vel_bound'][1]) for x in range(no_boids)]        #Generates the velocities of the boids.
+boid_x_vel=[random.uniform(config['x_vel_bound'][0],config['x_vel_bound'][1]) for x in range(no_boids)]       
 boid_y_vel=[random.uniform(config['y_vel_bound'][0],config['y_vel_bound'][1]) for x in range(no_boids)]
 boids=(boid_x_pos,boid_y_pos,boid_x_vel,boid_y_vel)
 
