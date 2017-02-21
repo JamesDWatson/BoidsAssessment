@@ -23,6 +23,7 @@ boid_x_vel=[random.uniform(config['x_vel_bound'][0],config['x_vel_bound'][1]) fo
 boid_y_vel=[random.uniform(config['y_vel_bound'][0],config['y_vel_bound'][1]) for x in range(no_boids)]
 boids=(boid_x_pos,boid_y_pos,boid_x_vel,boid_y_vel)
 
+# Define an array of boids.
 boid = [0] * no_boids
 for x in range(no_boids):
     boid[x] = Bird()
@@ -38,11 +39,11 @@ def update_boids(boids):
             x_vel[i]=x_vel[i]+(x_pos[j]-x_pos[i])*config['pos_weight']/no_boids
             y_vel[i]=y_vel[i]+(y_pos[j]-y_pos[i])*config['pos_weight']/no_boids
             
-            if sqr_dist(x_pos[j], x_pos[i], y_pos[j], y_pos[i]) < config['pos_diff']**2:
+            if sqr_dist(x_pos[j], x_pos[i], y_pos[j], y_pos[i]) < config['avoid_radius']**2:
                 x_vel[i]=x_vel[i]+(x_pos[i]-x_pos[j])
                 y_vel[i]=y_vel[i]+(y_pos[i]-y_pos[j])
             
-            if sqr_dist(x_pos[j], x_pos[i], y_pos[j], y_pos[i]) < config['vel_diff']**2:
+            if sqr_dist(x_pos[j], x_pos[i], y_pos[j], y_pos[i]) < config['vel_radius']**2:
                 x_vel[i]=x_vel[i]+(x_vel[j]-x_vel[i])*config['vel_weight']/no_boids
                 y_vel[i]=y_vel[i]+(y_vel[j]-y_vel[i])*config['vel_weight']/no_boids
                 

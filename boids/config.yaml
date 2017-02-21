@@ -4,8 +4,8 @@ x_vel_bound: [0.0,10.0]
 y_vel_bound: [-20.0,20.0]
 pos_weight: 0.01
 vel_weight: 0.125
-pos_diff: 10
-vel_diff: 100
+avoid_radius: 10
+vel_radius: 100
 x_lim: [-500,1500]
 y_lim: [-500,1500]
     
