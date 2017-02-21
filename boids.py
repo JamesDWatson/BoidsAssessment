@@ -27,7 +27,7 @@ boids=(boid_x_pos,boid_y_pos,boid_x_vel,boid_y_vel)
 def update_boids(boids):
     x_pos,y_pos,x_vel,y_vel= boids    # Use a np array to simplify loops.
     
-#    # Fly towards the middle
+    # Fly towards the middle
     for i in range(no_boids):
         for j in range(no_boids):
             x_vel[i]=x_vel[i]+(x_pos[j]-x_pos[i])*config['pos_weight']/no_boids
@@ -53,8 +53,8 @@ axes=plt.axes(xlim=(config['x_lim'][0],config['x_lim'][1]), ylim=(config['y_lim'
 scatter=axes.scatter(boids[0],boids[1])
 
 def animate(frame):
-   update_boids(boids)
-   scatter.set_offsets(list(zip(boids[0],boids[1])))
+    update_boids(boids)
+    scatter.set_offsets(list(zip(boids[0],boids[1])))
 
 
 anim = animation.FuncAnimation(figure, animate,

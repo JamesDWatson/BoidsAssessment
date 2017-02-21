@@ -8,7 +8,7 @@ import random
 # Deliberately terrible code for teaching purposes
 
 # Import variables from yaml file.
-config=yaml.load(open("config.yaml"))
+config=yaml.load(open("boids/config.yaml"))
 
 # Calculates distance between points via Pythogaras' theorem -- used later.
 def sqr_dist(x_1, x_2, y_1, y_2):

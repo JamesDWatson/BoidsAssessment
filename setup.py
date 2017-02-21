@@ -1,3 +1,4 @@
+
 from setuptools import setup, find_packages
 
 setup(
@@ -8,6 +9,6 @@ setup(
     author_email='05watson.j@gmail.com',
     url='https://github.com/JamesDWatson',
     packages = find_packages(exclude=['*test']),
-    scripts = ['scripts/greet'],
-    install_requires = ['argparse', 'pyyaml', 'matplotlib', 'numpy', 'random']   #Need to update with relevant packages.
+    scripts = ['scripts/bad_boids'],
+    install_requires = ['argparse', 'pyyaml', 'matplotlib', 'numpy']   
 )

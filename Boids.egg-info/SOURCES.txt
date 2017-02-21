@@ -1,0 +1,7 @@
+setup.py
+Boids.egg-info/PKG-INFO
+Boids.egg-info/SOURCES.txt
+Boids.egg-info/dependency_links.txt
+Boids.egg-info/requires.txt
+Boids.egg-info/top_level.txt
+scripts/bad_boids
