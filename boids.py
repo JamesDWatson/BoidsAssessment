@@ -4,6 +4,7 @@ from matplotlib import animation
 import numpy as np
 import yaml
 import random
+from classes import Bird
 
 
 # Import variables from yaml file.
@@ -21,6 +22,10 @@ boid_y_pos=[random.uniform(config['y_pos_bound'][0],config['y_pos_bound'][1]) fo
 boid_x_vel=[random.uniform(config['x_vel_bound'][0],config['x_vel_bound'][1]) for x in range(no_boids)]       
 boid_y_vel=[random.uniform(config['y_vel_bound'][0],config['y_vel_bound'][1]) for x in range(no_boids)]
 boids=(boid_x_pos,boid_y_pos,boid_x_vel,boid_y_vel)
+
+boid = [0] * no_boids
+for x in range(no_boids):
+    boid[x] = Bird()
 
 
 # Updates the postions of the boids.
