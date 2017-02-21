@@ -1,4 +1,3 @@
-
 from setuptools import setup, find_packages
 
 setup(
@@ -7,8 +6,8 @@ setup(
     version = "0.1.0",
     author='James Watson',
     author_email='05watson.j@gmail.com',
-    url='https://www.placeholder.org',
+    url='https://github.com/JamesDWatson',
     packages = find_packages(exclude=['*test']),
     scripts = ['scripts/greet'],
-    install_requires = ['argparse', 'yaml', 'matplotlib']   #Need to update with relevant packages.
+    install_requires = ['argparse', 'pyyaml', 'matplotlib', 'numpy', 'random']   #Need to update with relevant packages.
 )
