@@ -23,7 +23,6 @@ class Bird(object):
         delta_velx = 0
         delta_vely = 0
         
-        #print(type(self.x_pos))
         x_diff = self.x_pos - other_boid.x_pos
         y_diff = self.y_pos - other_boid.y_pos
         
@@ -34,13 +33,13 @@ class Bird(object):
             delta_velx += x_diff
             delta_vely += y_diff
         
-        if x_diff**2 +y_diff**2 < config['vel_radius']**2:    #Velocity correction due to velocity matching
+        if sqr_dist(x_diff, y_diff) < config['vel_radius']**2:    #Velocity correction due to velocity matching
             delta_velx += (other_boid.x_vel - self.x_vel)*config['vel_weight']/no_boids
             delta_vely += (other_boid.y_vel - self.y_vel)*config['vel_weight']/no_boids
         
         return([delta_velx, delta_vely])
     
-    def update(boid):
+    def update_boids( boid ):
         for i in range(no_boids):
             for j in range(no_boids):
                 boid[i].x_vel  = boid[i].x_vel + boid[i].vel_change(boid[j])[0]
@@ -48,7 +47,9 @@ class Bird(object):
 
         for i in range(no_boids):
             boid[i].x_pos=boid[i].x_pos+boid[i].x_vel
-            boid[i].y_pos=boid[i].y_pos+boid[i].y_vel 
+            boid[i].y_pos=boid[i].y_pos+boid[i].y_vel
+        
+        return 0
     
         
 #birds = [0] * no_boids

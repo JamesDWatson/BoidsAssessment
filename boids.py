@@ -25,14 +25,16 @@ def update(boid):
             
     for i in range(no_boids):
         boid[i].x_pos=boid[i].x_pos+boid[i].x_vel
-        boid[i].y_pos=boid[i].y_pos+boid[i].y_vel        
+        boid[i].y_pos=boid[i].y_pos+boid[i].y_vel
+                
         
 figure=plt.figure()
 axes=plt.axes(xlim=(config['x_lim'][0],config['x_lim'][1]), ylim=(config['y_lim'][0],config['y_lim'][1]))
 scatter=axes.scatter([0] * no_boids,[0] * no_boids)
 
 def animate(frame):
-    update(boid)
+    #update(boid)
+    Bird.update_boids(boid)
     position = [0] * no_boids
     for i in range(no_boids):
         position[i] = (boid[i].x_pos, boid[i].y_pos)
