@@ -5,8 +5,8 @@ import yaml
 no_boids = 50
 config=yaml.load(open("boids/config.yaml"))
 
-def sqr_dist(x_1, x_2, y_1, y_2):
-    return ( (x_1-x_2)**2 + (y_1 - y_2)**2)
+def sqr_dist(x, y):
+    return ( x**2 + y**2)
 
 class Bird(object):
     def __init__(self, config, no_boids): #, x_pos, y_pos, x_vel, y_vel, config, no_boids): 
@@ -30,7 +30,7 @@ class Bird(object):
         delta_velx += -x_diff*config['avoid_weight']/no_boids
         delta_vely += -y_diff*config['avoid_weight']/no_boids
         
-        if x_diff**2 +y_diff**2 < config['avoid_radius']**2:  #Velocity correction due to birds avoiding each other.
+        if sqr_dist(x_diff, y_diff) < config['avoid_radius']**2:  #Velocity correction due to birds avoiding each other.
             delta_velx += x_diff
             delta_vely += y_diff
         
@@ -39,6 +39,17 @@ class Bird(object):
             delta_vely += (other_boid.y_vel - self.y_vel)*config['vel_weight']/no_boids
         
         return([delta_velx, delta_vely])
+    
+    def update(boid):
+        for i in range(no_boids):
+            for j in range(no_boids):
+                boid[i].x_vel  = boid[i].x_vel + boid[i].vel_change(boid[j])[0]
+                boid[i].y_vel  = boid[i].y_vel + boid[i].vel_change(boid[j])[1]
+
+        for i in range(no_boids):
+            boid[i].x_pos=boid[i].x_pos+boid[i].x_vel
+            boid[i].y_pos=boid[i].y_pos+boid[i].y_vel 
+    
         
 #birds = [0] * no_boids
     
