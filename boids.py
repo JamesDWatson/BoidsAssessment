@@ -26,7 +26,11 @@ no_boids = 50
 # Define an array of boids.
 boid = [0] * no_boids
 for x in range(no_boids):
-    boid[x] = Bird(random.random(),random.random(),0,0, config, no_boids)
+    #boid_x_pos=random.uniform(config['x_pos_bound'][0],config['x_pos_bound'][1]) 
+    #boid_y_pos=random.uniform(config['y_pos_bound'][0],config['y_pos_bound'][1]) 
+    #boid_x_vel=random.uniform(config['x_vel_bound'][0],config['x_vel_bound'][1])        
+    #boid_y_vel=random.uniform(config['y_vel_bound'][0],config['y_vel_bound'][1]) 
+    boid[x] = Bird(config, no_boids) #boid_x_pos,boid_y_pos,boid_x_vel,boid_y_vel, config, no_boids)
 
 def update(boid):
     for i in range(no_boids):
@@ -38,9 +42,7 @@ def update(boid):
         boid[i].x_pos=boid[i].x_pos+boid[i].x_vel
         boid[i].y_pos=boid[i].y_pos+boid[i].y_vel
     
-    #for i in range(no_boids):
-        
-    
+            
     
 # Updates the postions of the boids.
 #def update_boids(boids):
