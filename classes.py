@@ -9,21 +9,23 @@ def sqr_dist(x_1, x_2, y_1, y_2):
     return ( (x_1-x_2)**2 + (y_1 - y_2)**2)
 
 class Bird(object):
-    def __init__(self, config, no_boids): 
-        self.x_pos = [random.uniform(config['x_pos_bound'][0],config['x_pos_bound'][1])]  #Generate initial conditions.
-        self.y_pos = [random.uniform(config['y_pos_bound'][0],config['y_pos_bound'][1])]
-        self.x_vel = [random.uniform(config['x_vel_bound'][0],config['x_vel_bound'][1])] 
-        self.y_vel = [random.uniform(config['y_vel_bound'][0],config['y_vel_bound'][1])] 
-
+    def __init__(self, x_pos, y_pos, x_vel, y_vel, config, no_boids): 
+        #self.x_pos = random.uniform(config['x_pos_bound'][0],config['x_pos_bound'][1])  #Generate initial conditions.
+        #self.y_pos = random.uniform(config['y_pos_bound'][0],config['y_pos_bound'][1])
+        #self.x_vel = random.uniform(config['x_vel_bound'][0],config['x_vel_bound'][1])
+        #self.y_vel = random.uniform(config['y_vel_bound'][0],config['y_vel_bound'][1]) 
+        self.x_pos = x_pos
+        self.y_pos = y_pos
+        self.x_vel = x_vel
+        self.y_vel = y_vel
         
     def vel_change(self, other_boid):  #Calculate the change of v and then add it to the current one.
         delta_velx = 0
         delta_vely = 0
         
+        #print(type(self.x_pos))
         x_diff = self.x_pos - other_boid.x_pos
         y_diff = self.y_pos - other_boid.y_pos
-        
-        delta_v+=separation*self.owner.flock_attraction
         
         delta_velx += -x_diff*config['avoid_weight']/no_boids
         delta_vely += -y_diff*config['avoid_weight']/no_boids
@@ -32,7 +34,7 @@ class Bird(object):
             delta_velx += x_diff
             delta_vely += y_diff
         
-        if x_diff**2 +y_diff**2 < config['vel_radius']**2:
+        if x_diff**2 +y_diff**2 < config['vel_radius']**2:    #Velocity correction due to velocity matching
             delta_velx += (other_boid.x_vel - self.x_vel)*config['vel_weight']/no_boids
             delta_vely += (other_boid.y_vel - self.y_vel)*config['vel_weight']/no_boids
         
