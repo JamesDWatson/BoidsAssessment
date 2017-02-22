@@ -26,7 +26,7 @@ boids=(boid_x_pos,boid_y_pos,boid_x_vel,boid_y_vel)
 # Define an array of boids.
 boid = [0] * no_boids
 for x in range(no_boids):
-    boid[x] = Bird()
+    boid[x] = Bird(config, no_boids)
 
 
 # Updates the postions of the boids.
@@ -36,8 +36,8 @@ def update_boids(boids):
     # Fly towards the middle
     for i in range(no_boids):
         for j in range(no_boids):
-            x_vel[i]=x_vel[i]+(x_pos[j]-x_pos[i])*config['pos_weight']/no_boids
-            y_vel[i]=y_vel[i]+(y_pos[j]-y_pos[i])*config['pos_weight']/no_boids
+            x_vel[i]=x_vel[i]+(x_pos[j]-x_pos[i])*config['avoid_weight']/no_boids
+            y_vel[i]=y_vel[i]+(y_pos[j]-y_pos[i])*config['avoid_weight']/no_boids
             
             if sqr_dist(x_pos[j], x_pos[i], y_pos[j], y_pos[i]) < config['avoid_radius']**2:
                 x_vel[i]=x_vel[i]+(x_pos[i]-x_pos[j])

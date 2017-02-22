@@ -16,7 +16,7 @@ class Bird(object):
         self.y_vel = [random.uniform(config['y_vel_bound'][0],config['y_vel_bound'][1])] 
 
         
-    def vel_change(self, other_boid)  #Calculate the change of v and then add it to the current one.
+    def vel_change(self, other_boid):  #Calculate the change of v and then add it to the current one.
         delta_velx = 0
         delta_vely = 0
         
@@ -25,13 +25,18 @@ class Bird(object):
         
         delta_v+=separation*self.owner.flock_attraction
         
-        delta_velx += -x_diff*config['pos_weight']/no_boids
-        delta_vely += -y_diff*config['pos_weight']/no_boids
+        delta_velx += -x_diff*config['avoid_weight']/no_boids
+        delta_vely += -y_diff*config['avoid_weight']/no_boids
         
-        if x_diff**2 +y_diff**2 < config['avoid_radius']**2:
+        if x_diff**2 +y_diff**2 < config['avoid_radius']**2:  #Velocity correction due to birds avoiding each other.
             delta_velx += x_diff
             delta_vely += y_diff
         
+        if x_diff**2 +y_diff**2 < config['vel_radius']**2:
+            delta_velx += (other_boid.x_vel - self.x_vel)*config['vel_weight']/no_boids
+            delta_vely += (other_boid.y_vel - self.y_vel)*config['vel_weight']/no_boids
+        
+        return([delta_velx, delta_vely])
         
 #birds = [0] * no_boids
     
@@ -40,7 +45,7 @@ class Bird(object):
 
 #print(birds[1].x_pos)
     
-class Flock(object)
+#class Flock(object):
 #    def __init__(self, number, config):
 #        self.number = number
 #        self.initial = initial    #defines the initial positions and velocities.
