@@ -9,6 +9,6 @@ setup(
     author_email='05watson.j@gmail.com',
     url='https://github.com/JamesDWatson',
     packages = find_packages(exclude=['*test']),
-    scripts = ['scripts/bad_boids'],
+    scripts = ['scripts/betterboids'],
     install_requires = ['argparse', 'pyyaml', 'matplotlib', 'numpy']   
 )
