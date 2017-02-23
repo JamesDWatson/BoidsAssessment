@@ -6,8 +6,12 @@ from classes import Bird
 import numpy
 import yaml
 import random
+import os
 
-config=yaml.load(open("boids/config.yaml"))
+#config=yaml.load(open("boids/config.yaml"))
+_ROOT = os.path.abspath(os.path.dirname(__file__))
+with open(os.path.join(_ROOT,'config_tests.yaml')) as config_file:
+        config = yaml.load(config_file)
 no_boids = 50
 
 def test_command_fails_non_numerical_input():                       #Tests that the argument is a valid place.
