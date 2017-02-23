@@ -3,10 +3,10 @@ import yaml
 import numpy as np
 import os
 
-#no_boids = 50
+no_boids = 50
 #config=yaml.load(open("boids/config.yaml"))
 _ROOT = os.path.abspath(os.path.dirname(__file__))
-with open(os.path.join(_ROOT,'boids/config.yaml')) as config_file:
+with open(os.path.join(_ROOT,'config.yaml')) as config_file:
         config = yaml.load(config_file)
 
 
@@ -68,9 +68,11 @@ class Bird(object):
         
         #return([delta_velx, delta_vely])
         
-        if str(type(other_boid)) != "<class 'classes.Bird'>":
+        if str(type(other_boid)) != "<class 'boids.classes.Bird'>":
             raise TypeError("Input must be of class Bird.")
            
+        #print(str(type(other_boid)))    
+            
         delta_vel = np.array([0,0])
         position_diff = np.array([other_boid.x_pos - self.x_pos, other_boid.y_pos - self.y_pos ])
         
@@ -82,8 +84,8 @@ class Bird(object):
     # Function updating the positions and velocities of the boids.
     def update_boids(no_boids, boid ):
         
-        #if type(boid) !=  list:
-        #    raise TypeError("Input to update_boids should be a list of boids.")
+        if type(boid) !=  list:
+            raise TypeError("Input to update_boids should be a list of boids.")
         
         for i in range(no_boids):
             for j in range(no_boids):

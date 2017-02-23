@@ -2,7 +2,7 @@
 """ Unit tests for the command file """
 
 from nose.tools import assert_raises, assert_almost_equal, assert_equal
-from classes import Bird
+from boids.classes import Bird
 import numpy
 import yaml
 import random
@@ -22,9 +22,9 @@ def test_Bird_fails_wrong_type():
     with assert_raises(TypeError) as exception:
         Bird(config, 50).vel_change('example')
 
-def test_update_boids():
+def test_update_boid():
     with assert_raises(TypeError) as exception:
-        Bird.update_boids( 'example' )
+        Bird(config, 50).update_boids( 2, 'example' )
         
 def test_vel_change_avoid():                          # No change in velocity if outside the chosen radius.
     assert_equal(0, Bird.vel_change_avoid([10,10],1))
@@ -39,6 +39,13 @@ def test_vel_change():
     boid2 = Bird(config, no_boids)
     delta_velx = boid1.vel_change(boid2)[0]  #should be in some range.
     assert_almost_equal(delta_velx, -0.0333147)
-
+    
+def test_update_boids():
+    random.seed(0)
+    boids = [ Bird(config, no_boids), Bird(config, no_boids)] 
+    Bird.update_boids( 2, boids)
+    assert_almost_equal( boids[0].x_pos, -23.61667314218311)  
+    assert_almost_equal(boids[0].y_pos, 517.72180967788)
+    
     
     

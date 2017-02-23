@@ -4,13 +4,13 @@ from matplotlib import animation
 import numpy as np
 import yaml
 import random
-from classes import Bird
+from boids.classes import Bird
 import os
 
  # Import variables from yaml file.
 #config=yaml.load(open("boids/config.yaml"))
 _ROOT = os.path.abspath(os.path.dirname(__file__))
-with open(os.path.join(_ROOT,'boids/config.yaml')) as config_file:
+with open(os.path.join(_ROOT,'config.yaml')) as config_file:
         config = yaml.load(config_file)
 #no_boids = int(arguments.number)
 no_boids = 50   #Need to get this from the command line.
