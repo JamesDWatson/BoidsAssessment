@@ -1,4 +1,0 @@
-argparse
-pyyaml
-matplotlib
-numpy

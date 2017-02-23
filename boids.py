@@ -8,7 +8,6 @@ from boids.classes import Bird
 import os
 
  # Import variables from yaml file.
-#config=yaml.load(open("boids/config.yaml"))
 _ROOT = os.path.abspath(os.path.dirname(__file__))
 with open(os.path.join(_ROOT,'config.yaml')) as config_file:
         config = yaml.load(config_file)

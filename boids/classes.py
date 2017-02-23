@@ -84,8 +84,8 @@ class Bird(object):
     # Function updating the positions and velocities of the boids.
     def update_boids(no_boids, boid ):
         
-        if type(boid) !=  list:
-            raise TypeError("Input to update_boids should be a list of boids.")
+        if type(boid) !=  list or type(no_boids) != int:
+            raise TypeError("Input to update_boids should be an integer and a list of boids.")
         
         for i in range(no_boids):
             for j in range(no_boids):

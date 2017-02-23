@@ -17,7 +17,6 @@ def process():
     
     # Import variables from yaml file.
     config=yaml.load(open("boids/config.yaml"))
-    #no_boids = int(arguments.number)
     no_boids = 50   #Need to get this from the command line.
 
     # Initialise an array of boids, specified by the Bird class.
