@@ -10,5 +10,5 @@ setup(
     url='https://github.com/JamesDWatson',
     packages = find_packages(exclude=['*test']),
     scripts = ['scripts/betterboids'],
-    install_requires = ['argparse', 'pyyaml', 'matplotlib', 'numpy']   
+    install_requires = ['argparse', 'pyyaml', 'matplotlib', 'numpy', 'pyrandom', 'nose']   
 )

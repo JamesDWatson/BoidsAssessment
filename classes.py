@@ -25,12 +25,7 @@ class Bird(object):
         self.y_pos = random.uniform(config['y_pos_bound'][0],config['y_pos_bound'][1])
         self.x_vel = random.uniform(config['x_vel_bound'][0],config['x_vel_bound'][1])
         self.y_vel = random.uniform(config['y_vel_bound'][0],config['y_vel_bound'][1]) 
-        #self.x_pos = x_pos
-        #self.y_pos = y_pos
-        #self.x_vel = x_vel
-        #self.y_vel = y_vel
-        
-        # Test for no_boids:
+        self.no_boids = no_boids
         
         
     def vel_change(self, other_boid):  #Calculate the change of v and then add it to the current one.
@@ -52,6 +47,9 @@ class Bird(object):
         #    delta_vely += (other_boid.y_vel - self.y_vel)*config['vel_weight']/no_boids
         
         #return([delta_velx, delta_vely])
+        
+        if str(type(other_boid)) != "<class '__main__.Bird'>":
+            raise TypeError("Input must be of class Bird.")
         
         delta_vel = np.array([0,0])
         position_diff = np.array([other_boid.x_pos - self.x_pos, other_boid.y_pos - self.y_pos ])

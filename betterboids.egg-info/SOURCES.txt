@@ -1,0 +1,11 @@
+setup.py
+betterboids.egg-info/PKG-INFO
+betterboids.egg-info/SOURCES.txt
+betterboids.egg-info/dependency_links.txt
+betterboids.egg-info/requires.txt
+betterboids.egg-info/top_level.txt
+boids/__init__.py
+boids/__init__.py.py
+boids/classes.py
+boids/command.py
+scripts/betterboids

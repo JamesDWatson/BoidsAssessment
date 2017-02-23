@@ -14,3 +14,7 @@ config=yaml.load(open("boids/config.yaml"))
 def test_command_fails_non_numerical_input():                       #Tests that the argument is a valid place.
     with assert_raises(TypeError) as exception: 
         Bird(config, '10.1')
+        
+def test_Bird_fails_wrong_type():
+    with assert_raises(TypeError) as exception:
+        Bird(config, 50).vel_change('example')
