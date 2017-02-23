@@ -10,6 +10,17 @@ def sqr_dist(x, y):
 
 class Bird(object):
     def __init__(self, config, no_boids): #, x_pos, y_pos, x_vel, y_vel, config, no_boids): 
+        
+        def is_integer(s):    #Function checks if string has a representation as a float.
+            try:
+                int(s)
+                return True
+            except ValueError:
+                return False
+    
+        if is_integer(no_boids) == False:
+            raise TypeError("Number of boids should be an integer.")
+        
         self.x_pos = random.uniform(config['x_pos_bound'][0],config['x_pos_bound'][1])  #Generate initial conditions.
         self.y_pos = random.uniform(config['y_pos_bound'][0],config['y_pos_bound'][1])
         self.x_vel = random.uniform(config['x_vel_bound'][0],config['x_vel_bound'][1])
@@ -18,6 +29,9 @@ class Bird(object):
         #self.y_pos = y_pos
         #self.x_vel = x_vel
         #self.y_vel = y_vel
+        
+        # Test for no_boids:
+        
         
     def vel_change(self, other_boid):  #Calculate the change of v and then add it to the current one.
         #delta_velx = 0

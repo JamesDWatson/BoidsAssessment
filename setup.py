@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name = "Boids",
+    name = "betterboids",
     description='Bird Flock Simulator',
     version = "0.1.0",
     author='James Watson',

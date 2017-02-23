@@ -8,7 +8,6 @@ import yaml
 import random
 from .classes import Bird
 
-#config=yaml.load(open("config.yaml"))
 
 def process():
     parser = ArgumentParser(description = "Generate flock of boids")
@@ -21,7 +20,7 @@ def process():
     #no_boids = int(arguments.number)
     no_boids = 50   #Need to get this from the command line.
 
-    # Initialise an array of boids.
+    # Initialise an array of boids, specified by the Bird class.
     boid = [0] * no_boids
     for x in range(no_boids):
         boid[x] = Bird(config, no_boids) 
