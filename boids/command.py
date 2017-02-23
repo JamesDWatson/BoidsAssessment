@@ -11,15 +11,15 @@ from .classes import Bird
 #config=yaml.load(open("config.yaml"))
 
 def process():
-    parser = ArgumentParser(description = "Generate boids movement")
+    parser = ArgumentParser(description = "Generate flock of boids")
     parser.add_argument('--number', help='Specify the number of boids for the simulation')
     arguments= parser.parse_args()
-    #got rid of action="store_true" in the above.
+
     
     # Import variables from yaml file.
     config=yaml.load(open("boids/config.yaml"))
-    no_boids = int(arguments.number)
-    #no_boids = 50   #Need to get this from the command line.
+    #no_boids = int(arguments.number)
+    no_boids = 50   #Need to get this from the command line.
 
     # Initialise an array of boids.
     boid = [0] * no_boids
@@ -31,7 +31,6 @@ def process():
     scatter=axes.scatter([0] * no_boids,[0] * no_boids)
 
     def animate(frame):
-        #update(boid)
         Bird.update_boids(boid)
         position = [0] * no_boids
         for i in range(no_boids):
