@@ -27,6 +27,20 @@ class Bird(object):
         self.y_vel = random.uniform(config['y_vel_bound'][0],config['y_vel_bound'][1]) 
         self.no_boids = no_boids
         
+        if self.x_pos >= config['x_pos_bound'][1]  or config['x_pos_bound'][0] >= self.x_pos:  #Ensure the generate numbers are correct.
+            raise ValueError("x position is not between the expected limits.")
+        
+        
+    def vel_change_avoid(position_diff, avoid_radius):
+        if sqr_dist(position_diff[0], position_diff[1]) < avoid_radius**2:
+            return( - position_diff)
+        else:
+            return(0)
+    def vel_matching( position_diff, config):
+        if sqr_dist(position_diff[0], position_diff[1]) < config['vel_radius']**2:
+            return( position_diff*config['vel_weight']/no_boids )
+        else:
+            return(0)
         
     def vel_change(self, other_boid):  #Calculate the change of v and then add it to the current one.
         #delta_velx = 0
@@ -48,24 +62,29 @@ class Bird(object):
         
         #return([delta_velx, delta_vely])
         
-        if str(type(other_boid)) != "<class '__main__.Bird'>":
+        if str(type(other_boid)) != "<class 'classes.Bird'>":
             raise TypeError("Input must be of class Bird.")
-        
+           
         delta_vel = np.array([0,0])
         position_diff = np.array([other_boid.x_pos - self.x_pos, other_boid.y_pos - self.y_pos ])
         
-        delta_vel = delta_vel + position_diff*config['avoid_weight']/no_boids
+        delta_vel = delta_vel + position_diff*config['avoid_weight']/no_boids + Bird.vel_change_avoid(position_diff,config['avoid_radius']) 
+        +Bird.vel_matching( position_diff, config)
         
-        if sqr_dist(position_diff[0], position_diff[1]) < config['avoid_radius']**2:
-            delta_vel = delta_vel - position_diff
+        #if sqr_dist(position_diff[0], position_diff[1]) < config['avoid_radius']**2:
+        #    delta_vel = delta_vel - position_diff
             
-        if sqr_dist(position_diff[0], position_diff[1]) < config['vel_radius']**2:
-            delta_vel = delta_vel + position_diff*config['vel_weight']/no_boids
+        #if sqr_dist(position_diff[0], position_diff[1]) < config['vel_radius']**2:
+        #    delta_vel = delta_vel + position_diff*config['vel_weight']/no_boids
         
         return(delta_vel)
     
     # Function updating the positions and velocities of the boids.
     def update_boids( boid ):
+        
+        if type(boid) !=  list:
+            raise TypeError("Input to update_boids should be a list of boids.")
+        
         for i in range(no_boids):
             for j in range(no_boids):
                 boid[i].x_vel  = boid[i].x_vel + boid[i].vel_change(boid[j])[0]
@@ -76,19 +95,3 @@ class Bird(object):
             boid[i].y_pos=boid[i].y_pos+boid[i].y_vel
         
         return(boid)
-    
-#    def animate_boids(frame, boid):
-#        #update(boid)
-#        Bird.update_boids(boid)
-#        position = [0] * no_boids
-#        for i in range(no_boids):
-#            position[i] = (boid[i].x_pos, boid[i].y_pos)
-#        scatter.set_offsets(list(position))
-        
-        
-#birds = [0] * no_boids
-    
-#for x in range(no_boids):
-#    birds[x] = Bird()
-
-#print(birds[1].x_pos)
