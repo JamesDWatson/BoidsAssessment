@@ -30,7 +30,7 @@ def process():
     scatter=axes.scatter([0] * no_boids,[0] * no_boids)
 
     def animate(frame):
-        Bird.update_boids(boid)
+        Bird.update_boids(no_boids, boid)
         position = [0] * no_boids
         for i in range(no_boids):
             position[i] = (boid[i].x_pos, boid[i].y_pos)

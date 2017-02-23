@@ -1,9 +1,14 @@
 import random
 import yaml
 import numpy as np
+import os
 
-no_boids = 50
-config=yaml.load(open("boids/config.yaml"))
+#no_boids = 50
+#config=yaml.load(open("boids/config.yaml"))
+_ROOT = os.path.abspath(os.path.dirname(__file__))
+with open(os.path.join(_ROOT,'boids/config.yaml')) as config_file:
+        config = yaml.load(config_file)
+
 
 def sqr_dist(x, y):
     return ( x**2 + y**2)
@@ -11,7 +16,7 @@ def sqr_dist(x, y):
 class Bird(object):
     def __init__(self, config, no_boids): #, x_pos, y_pos, x_vel, y_vel, config, no_boids): 
         
-        def is_integer(s):    #Function checks if string has a representation as a float.
+        def is_integer(s):    #Function checks if string has a representation as an integer.
             try:
                 int(s)
                 return True
@@ -36,9 +41,10 @@ class Bird(object):
             return( - position_diff)
         else:
             return(0)
-    def vel_matching( position_diff, config):
-        if sqr_dist(position_diff[0], position_diff[1]) < config['vel_radius']**2:
-            return( position_diff*config['vel_weight']/no_boids )
+        
+    def vel_matching(self, position_diff, vel_weight, vel_match_radius):
+        if sqr_dist(position_diff[0], position_diff[1]) < vel_match_radius**2:
+            return( position_diff*vel_weight/self.no_boids )
         else:
             return(0)
         
@@ -68,22 +74,16 @@ class Bird(object):
         delta_vel = np.array([0,0])
         position_diff = np.array([other_boid.x_pos - self.x_pos, other_boid.y_pos - self.y_pos ])
         
-        delta_vel = delta_vel + position_diff*config['avoid_weight']/no_boids + Bird.vel_change_avoid(position_diff,config['avoid_radius']) 
-        +Bird.vel_matching( position_diff, config)
-        
-        #if sqr_dist(position_diff[0], position_diff[1]) < config['avoid_radius']**2:
-        #    delta_vel = delta_vel - position_diff
-            
-        #if sqr_dist(position_diff[0], position_diff[1]) < config['vel_radius']**2:
-        #    delta_vel = delta_vel + position_diff*config['vel_weight']/no_boids
+        delta_vel = delta_vel + position_diff*config['avoid_weight']/self.no_boids + Bird.vel_change_avoid(position_diff,config['avoid_radius']) 
+        +Bird.vel_matching( self, position_diff, config['vel_weight'], config['vel_radius'])
         
         return(delta_vel)
     
     # Function updating the positions and velocities of the boids.
-    def update_boids( boid ):
+    def update_boids(no_boids, boid ):
         
-        if type(boid) !=  list:
-            raise TypeError("Input to update_boids should be a list of boids.")
+        #if type(boid) !=  list:
+        #    raise TypeError("Input to update_boids should be a list of boids.")
         
         for i in range(no_boids):
             for j in range(no_boids):

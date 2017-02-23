@@ -1,0 +1,6 @@
+
+include CITATION.md
+include README.md
+include LICENSE.md
+include config.yaml
+include boids/config.yaml
