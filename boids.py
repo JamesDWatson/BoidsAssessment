@@ -12,7 +12,7 @@ _ROOT = os.path.abspath(os.path.dirname(__file__))
 with open(os.path.join(_ROOT,'config.yaml')) as config_file:
         config = yaml.load(config_file)
 #no_boids = int(arguments.number)
-no_boids = 50   #Need to get this from the command line.
+no_boids = config['no_boids']   #Need to get this from the command line.
 
 # Initialise an array of boids, specified by the Bird class.
 boid = [0] * no_boids
